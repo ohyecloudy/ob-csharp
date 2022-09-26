@@ -1,4 +1,4 @@
-;;; ob-csharp.el --- org-babel functions for csharp evaluation
+;;; ob-cs.el --- org-babel functions for csharp evaluation
 
 ;; Copyright (C) 2011-2015 Free Software Foundation, Inc.
 
@@ -31,7 +31,7 @@
 (require 'ob)
 
 (defvar org-babel-tangle-lang-exts)
-(add-to-list 'org-babel-tangle-lang-exts '("csharp" . "csx"))
+(add-to-list 'org-babel-tangle-lang-exts '("cs" . "csx"))
 
 (defcustom org-babel-csharp-command "dotnet-script"
   "Name of the csharp command.
@@ -42,7 +42,7 @@ parameters may be used, like mono -verbose"
   :version "24.3"
   :type 'string)
 
-(defun org-babel-execute:csharp (body params)
+(defun org-babel-execute:cs (body params)
   (let* ((full-body (org-babel-expand-body:generic body params))
          (cmpflag (or (cdr (assoc :cmpflag params)) ""))
          (cmdline (or (cdr (assoc :cmdline params)) ""))
@@ -61,10 +61,10 @@ parameters may be used, like mono -verbose"
        (org-babel-pick-name
         (cdr (assoc :rowname-names params)) (cdr (assoc :rownames params)))))))
 
-(defun org-babel-prep-session:csharp (session params)
+(defun org-babel-prep-session:cs (session params)
   "Return an error because csharp does not support sessions."
   (error "Sessions are not (yet) supported for CSharp"))
 
 
-(provide 'ob-csharp)
-;;; ob-csharp.el ends here
+(provide 'ob-cs)
+;;; ob-cs.el ends here
